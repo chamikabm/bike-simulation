@@ -3,6 +3,7 @@ package org.bmck;
 import org.bmck.inputs.ConsoleInputProvider;
 import org.bmck.inputs.InputProvider;
 
+
 /**
  * The main entry point for the Bike Simulator application.
  */
@@ -13,6 +14,7 @@ public class BikeSimulatorApp {
      * @param args The command line arguments.
      */
     public static void main( String[] args ) {
+
         // Take the input from the console.
         try (InputProvider inputProvider = new ConsoleInputProvider()) {
             while (true) {
