@@ -4,7 +4,6 @@ package org.bmck.constants;
  * This class contains constants used in the BikeSimulator application.
  */
 public class BikeSimulatorConstants {
-
     /**
      * Key for system logging enabled constant.
      */

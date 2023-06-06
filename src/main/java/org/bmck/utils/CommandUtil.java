@@ -1,5 +1,7 @@
 package org.bmck.utils;
 
+import java.util.Optional;
+
 /**
  * Utility class for parsing and manipulating commands.
  */
@@ -14,16 +16,16 @@ public class CommandUtil {
      * @param command The command string to split.
      * @return An array of command values, or null if the command is invalid.
      */
-    public static String[] getCommandValues(String command) {
+    public static Optional<String[]> getCommandValues(String command) {
         if (command == null || command.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
 
         try {
-            return command.split("[,\\s]+");
+            return Optional.of(command.split("[,\\s]+"));
         } catch (Exception e) {
             System.err.println("Error while splitting the commands. Error: " + e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 }

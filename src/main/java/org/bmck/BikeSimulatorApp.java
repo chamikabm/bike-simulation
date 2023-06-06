@@ -2,6 +2,9 @@ package org.bmck;
 
 import org.bmck.inputs.ConsoleInputProvider;
 import org.bmck.inputs.InputProvider;
+import org.bmck.simulator.bike_simulator.BikeSimulator;
+
+import java.util.Optional;
 
 
 /**
@@ -14,6 +17,8 @@ public class BikeSimulatorApp {
      * @param args The command line arguments.
      */
     public static void main( String[] args ) {
+        // Create Simulator
+        BikeSimulator bikeSimulator = new BikeSimulator();
 
         // Take the input from the console.
         try (InputProvider inputProvider = new ConsoleInputProvider()) {
@@ -27,7 +32,8 @@ public class BikeSimulatorApp {
                 }
 
                 // Process the command and print output if present.
-                System.out.println("Command to process: " + command);
+                Optional<String> commandOutput = bikeSimulator.processCommand(command);
+                commandOutput.ifPresent(System.out::println);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
