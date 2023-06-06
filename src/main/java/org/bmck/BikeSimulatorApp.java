@@ -4,7 +4,7 @@ package org.bmck;
  * Hello world!
  *
  */
-public class App 
+public class BikeSimulatorApp
 {
     public static void main( String[] args )
     {
