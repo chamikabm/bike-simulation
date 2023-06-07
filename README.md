@@ -35,7 +35,7 @@
 > To run the application, use the following command:
 
 ```shell
- java -jar target /bike-simulation-1.0-SNAPSHOT.jar
+java -jar target/bike-simulation-1.0-SNAPSHOT.jar
 ````
 
 ## Running Tests
