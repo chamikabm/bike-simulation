@@ -2,9 +2,19 @@ package org.bmck;
 
 import org.bmck.inputs.ConsoleInputProvider;
 import org.bmck.inputs.InputProvider;
+import org.bmck.logger.Logger;
+import org.bmck.logger.SoutLogger;
+import org.bmck.points.Coordinate;
+import org.bmck.shapes.Shape;
+import org.bmck.shapes.SquareGrid;
+import org.bmck.simulator.Simulator;
 import org.bmck.simulator.bike_simulator.BikeSimulator;
+import org.bmck.utils.ConfigUtil;
 
 import java.util.Optional;
+
+import static org.bmck.constants.BikeSimulatorConstants.MAX_COORDINATE_KEY;
+import static org.bmck.constants.BikeSimulatorConstants.MIN_COORDINATE_KEY;
 
 
 /**
@@ -17,8 +27,22 @@ public class BikeSimulatorApp {
      * @param args The command line arguments.
      */
     public static void main( String[] args ) {
+        // Get Min-Max Coordinate Config Values
+        int minCoordinateValue = ConfigUtil.getIntProperty(MIN_COORDINATE_KEY);
+        int maxCoordinateValue = ConfigUtil.getIntProperty(MAX_COORDINATE_KEY);
+
+        // Prepare Min-Max Coordinates
+        Coordinate minCoordinate = new Coordinate(minCoordinateValue, minCoordinateValue);
+        Coordinate maxCoordinate =  new Coordinate(maxCoordinateValue, maxCoordinateValue);
+
+        // Create the Grid
+        Shape grid = new SquareGrid(minCoordinate, maxCoordinate);
+
+        // Create logger
+        Logger logger = new SoutLogger();
+
         // Create Simulator
-        BikeSimulator bikeSimulator = new BikeSimulator();
+        Simulator bikeSimulator = new BikeSimulator(grid, logger);
 
         // Take the input from the console.
         try (InputProvider inputProvider = new ConsoleInputProvider()) {

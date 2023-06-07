@@ -1,6 +1,7 @@
 package org.bmck.simulator.bike_simulator;
 
 import org.bmck.logger.SoutLogger;
+import org.bmck.points.Coordinate;
 import org.bmck.shapes.SquareGrid;
 import org.bmck.simulator.CommandProcessor;
 
@@ -22,6 +23,20 @@ public class ForwardCommandProcessor implements CommandProcessor<BikeSimulator, 
      */
     @Override
     public Optional<String> processCommand(String[] commandValues, BikeSimulator simulator, SquareGrid shape, SoutLogger logger) {
+        Coordinate currentCoordinate = simulator.getCoordinate();
+        Coordinate facing = simulator.getFacing();
+
+        Coordinate nextCoordinate = new Coordinate(
+                currentCoordinate.x() + facing.x(),
+                currentCoordinate.y() + facing.y()
+        );
+
+        if (shape.isOnTheGrid(nextCoordinate)) {
+            simulator.setCoordinate(nextCoordinate);
+        } else {
+            logger.warn("Cannot move forward, bike will fall off the grid.");
+        }
+
         return Optional.empty();
     }
 }

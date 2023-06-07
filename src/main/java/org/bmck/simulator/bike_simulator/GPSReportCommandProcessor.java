@@ -1,8 +1,11 @@
 package org.bmck.simulator.bike_simulator;
 
+import org.bmck.enums.ValidDirection;
 import org.bmck.logger.SoutLogger;
+import org.bmck.points.Coordinate;
 import org.bmck.shapes.SquareGrid;
 import org.bmck.simulator.CommandProcessor;
+import org.bmck.utils.DirectionUtil;
 
 import java.util.Optional;
 
@@ -22,7 +25,15 @@ public class GPSReportCommandProcessor implements CommandProcessor<BikeSimulator
      */
     @Override
     public Optional<String> processCommand(String[] commandValues, BikeSimulator simulator, SquareGrid shape, SoutLogger logger) {
+        Coordinate coordinate = simulator.getCoordinate();
+        Optional<ValidDirection> facingDirection = DirectionUtil.getFacingDirection(simulator.getFacing());
 
-        return Optional.empty();
+        if (facingDirection.isEmpty()) {
+            // Invalid facing direction.
+            logger.warn("Invalid facing direction");
+            return Optional.empty();
+        }
+
+        return Optional.of(String.format("%s, %s", coordinate.getPrintableLocation(), facingDirection.get()));
     }
 }
