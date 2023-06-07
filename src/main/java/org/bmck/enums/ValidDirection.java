@@ -2,6 +2,8 @@ package org.bmck.enums;
 
 import org.bmck.points.Coordinate;
 
+import java.util.Optional;
+
 /**
  * Enumeration representing valid directions in the BikeSimulator application.
  */
@@ -26,4 +28,20 @@ public enum ValidDirection {
             default -> null;
         };
     }
+
+    /**
+     * Converts a string value to the corresponding ValidDirection enumeration value.
+     *
+     * @param value The string value to convert.
+     * @return The ValidDirection enumeration value corresponding to the given string value,
+     *         or null if the string value is invalid.
+     */
+    public static Optional<ValidDirection> fromString(String value) {
+        try {
+            return Optional.of(valueOf(value));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return Optional.empty();
+        }
+    }
+
 }

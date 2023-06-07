@@ -1,6 +1,7 @@
 package org.bmck.simulator.bike_simulator;
 
 import org.bmck.logger.SoutLogger;
+import org.bmck.points.Coordinate;
 import org.bmck.shapes.SquareGrid;
 import org.bmck.simulator.CommandProcessor;
 
@@ -22,7 +23,14 @@ public class TurnRightCommandProcessor implements CommandProcessor<BikeSimulator
      */
     @Override
     public Optional<String> processCommand(String[] commandValues, BikeSimulator simulator, SquareGrid shape, SoutLogger logger) {
+        Coordinate facing = simulator.getFacing();
 
+        Coordinate newFacing = new Coordinate(
+                facing.y(),
+                facing.x() == 0 ? 0 : -facing.x()
+        );
+
+        simulator.setFacing(newFacing);
         return Optional.empty();
     }
 }
